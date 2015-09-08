@@ -1,63 +1,55 @@
+# require-relative './read_markdown.rb'
+require_relative './methods.rb'                                                                       # => true
+# markdown_handle = File.open(ARGV[0], "r")
+# incoming_text = markdown_handle.read
+# markdown_handle.close
+markdown_input = File.open("/Users/mattrooney/code/1508/projects/Chisel/lib/my_input.markdown", "r")  # => #<File:/Users/mattrooney/code/1508/projects/Chisel/lib/my_input.markdown>
+incoming_text = markdown_input.read                                                                   # => "# My Life in Desserts\n\n## Chapter 1: The Beginning\n\n\"You just *have* to try the cheesecake,\" he said. \"Ever since it appeared in\n**Food & Wine** this place has been packed every night.\"\n"
+html_output = []                                                                                      # => []
 
-  def parse_h1(h1)
-      if h1[0].include? "#"
-        h1 = h1.delete "# "
-        "<h1>#{h1}</h1>"
-      else "<p>#{h1}</p>"
-      end
+markdown_lines = incoming_text.split "\n"  # => ["# My Life in Desserts", "", "## Chapter 1: The Beginning", "", "\"You just *have* to try the cheesecake,\" he said. \"Ever since it appeared in", "**Food & Wine** this place has been packed every night.\""]
+
+markdown_lines.each do |sentence|               # => ["# My Life in Desserts", "", "## Chapter 1: The Beginning", "", "\"You just *have* to try the cheesecake,\" he said. \"Ever since it appeared in", "**Food & Wine** this place has been packed every night.\""]
+  if sentence.start_with? "#"                   # => true
+    sentence.header                             # ~> NoMethodError: undefined method `header' for "# My Life in Desserts":String
+    html_sentence = sentence.delete "#"
+  # elsif sentence.start_with? "*"
+  # # elsif sentence.chars[0] =
+  # elsif sentence.include? "*"
+  #   asterisk_count = sentence.count "*"
+      else html_output << "<p>#{sentence}</p>"
   end
-
-  def parse_h2(h2)
-    if h2[0..1].include? "##"
-      h2 = h2.delete "## "
-      "<h2>#{h2}</h2>"
-    end
-  end
-
-  def parse_h3(h3)
-    if h3[0..2].include? "###"
-      h3 = h3.delete "### "
-      "<h3>#{h3}</h3>"
-    end
-  end
-
-  def parse_h4(h4)
-    if h4[0..3].include? "####"
-      h4 = h4.delete "#### "
-      "<h4>#{h4}</h4>"
-    end
-  end
-
-  def parse_h5(h5)
-    if h5[0..4].include? "#####"
-      h5 = h5.delete "##### "
-      "<h5>#{h5}</h5>"
-    end
-  end
-
-  def parse_h6(h6)
-    if h6[0..5].include? "######"
-      h6 = h6.delete "###### "
-      "<h6>#{h6}</h6>"
-    end
-  end
-
-# text = "This is not a header"
-#parse_h1(text)
+end
 
 
-#   def parse_header
-#       if string[5]
-#         parse_h5
-#       elsif string[6]
-#         parse_h6
+  # # unless markdown_lines[0..1] = "<h"
+  #  markdown_lines.each do |sentence|
+  #    html_output << "<p>#{sentence}</p>"
+  #  end
+
+puts html_output
+
+
+# end
+
 #
-#       else
-#     end
+# markdown_line.each do |sentence|
+#   if sentence.include? "*" && sentence.count "*" % 2 = 1
+#     # sentence.unordered_list
+#   elsif sentence.include? "*" && sentence.count "*" % 2 = 0
+#     # sentence.emphasis
+#     empasis_sentence = sentence.split " "
+#
+#     html_text << ""
 #   end
+# end
+# html_text.each do |header|
 #
+# end
 
-# end_with?
-# lines(separator=$/)
-# same as str.each_line(separator).to_a
-# line_array = line.split
+# ~> NoMethodError
+# ~> undefined method `header' for "# My Life in Desserts":String
+# ~>
+# ~> /Users/mattrooney/code/1508/projects/Chisel/lib/chisel.rb:14:in `block in <main>'
+# ~> /Users/mattrooney/code/1508/projects/Chisel/lib/chisel.rb:12:in `each'
+# ~> /Users/mattrooney/code/1508/projects/Chisel/lib/chisel.rb:12:in `<main>'
